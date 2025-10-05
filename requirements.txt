@@ -12,7 +12,7 @@ matplotlib>=3.5.0
 pillow>=8.3.0
 
 # NLP processing
-spacy>=3.4.0
+spacy>=3.2.0,<3.4.0
 
 # Jupyter support
 ipykernel>=6.0.0
