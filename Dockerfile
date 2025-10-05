@@ -14,7 +14,6 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y \
     build-essential \
     curl \
-    software-properties-common \
     git \
     && rm -rf /var/lib/apt/lists/*
 
@@ -33,14 +32,8 @@ RUN uv pip install --system -r requirements-dev.txt
 RUN uv pip install --system \
     jupyter \
     jupyterlab \
-    jupyter-contrib-nbextensions \
-    jupyter-nbextensions-configurator \
     ipywidgets \
     nbconvert
-
-# Enable Jupyter extensions
-RUN jupyter contrib nbextension install --system && \
-    jupyter nbextension enable --py widgetsnbextension --sys-prefix
 
 # Create directories for data and notebooks
 RUN mkdir -p /app/data /app/notebooks /app/models
