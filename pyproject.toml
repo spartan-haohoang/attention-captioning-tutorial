@@ -1,17 +1,17 @@
 [build-system]
-requires = ["setuptools>=61.0", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
 
-[project]
+[tool.poetry]
 name = "attention-based-neural-networks"
 version = "0.1.0"
 description = "Image Captioning with Attention-Based Neural Networks"
+authors = ["Your Name <your.email@example.com>"]
+license = "MIT"
 readme = "README.md"
-requires-python = ">=3.8"
-license = {text = "MIT"}
-authors = [
-    {name = "Your Name", email = "your.email@example.com"},
-]
+homepage = "https://github.com/yourusername/attention-based-neural-networks"
+repository = "https://github.com/yourusername/attention-based-neural-networks.git"
+documentation = "https://attention-based-neural-networks.readthedocs.io"
 keywords = ["deep-learning", "attention", "neural-networks", "image-captioning", "pytorch"]
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -28,62 +28,34 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
-dependencies = [
-    # Core ML/DL frameworks - using compatible versions
-    "torch>=2.0.0,<2.8.0",
-    "torchvision>=0.15.0,<0.18.0",
-    "torchtext>=0.15.0,<0.18.0",
-    # Data manipulation and analysis
-    "numpy>=1.21.0",
-    "pandas>=1.3.0",
-    "matplotlib>=3.5.0",
-    "pillow>=8.3.0",
-    # NLP and text processing
-    "spacy>=3.4.0",
-    # Machine learning utilities
-    "scikit-learn>=1.1.0",
-    "tqdm>=4.64.0",
-    # Jupyter and notebook support
-    "jupyter>=1.0.0",
-    "jupyterlab>=3.4.0",
-    "ipywidgets>=7.7.0",
-    "nbconvert>=6.4.0",
-    # Additional utilities
-    "seaborn>=0.11.0",
-    "plotly>=5.10.0",
-    "opencv-python>=4.6.0",
-]
 
-[project.optional-dependencies]
-dev = [
-    "pytest>=7.0.0",
-    "pytest-cov>=4.0.0",
-    "black>=22.0.0",
-    "isort>=5.10.0",
-    "flake8>=5.0.0",
-    "mypy>=0.971",
-    "pre-commit>=2.20.0",
-    "jupyter-contrib-nbextensions>=0.7.0",
-    "jupyter-nbextensions-configurator>=0.6.0",
-]
-docs = [
-    "sphinx>=5.0.0",
-    "sphinx-rtd-theme>=1.0.0",
-    "myst-parser>=0.18.0",
-]
+[tool.poetry.dependencies]
+python = "^3.8"
+ipykernel = "^6.0.0"
+# Core ML/DL frameworks
+torch = ">=2.0.0,<2.8.0"
+torchtext = "0.15.2"
+torchvision = ">=0.15.0,<0.18.0"
+# Data manipulation and analysis
+numpy = "^1.21.0"
+pandas = "^1.3.0"
+matplotlib = "^3.5.0"
+# Image processing
+pillow = "^8.3.0"
+# NLP processing
+spacy = "^3.4.0"
+# Jupyter support
+jupyter = "^1.0.0"
+jupyterlab = "^3.4.0"
+ipywidgets = "^7.7.0"
+nbconvert = "^6.4.0"
 
-[project.urls]
-Homepage = "https://github.com/yourusername/attention-based-neural-networks"
-Repository = "https://github.com/yourusername/attention-based-neural-networks.git"
-Issues = "https://github.com/yourusername/attention-based-neural-networks/issues"
-Documentation = "https://attention-based-neural-networks.readthedocs.io"
+[tool.poetry.group.dev.dependencies]
 
-[project.scripts]
+[tool.poetry.group.docs.dependencies]
+
+[tool.poetry.scripts]
 attention-networks = "attention_networks.cli:main"
-
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["attention_networks*"]
 
 [tool.black]
 line-length = 88
@@ -98,8 +70,6 @@ extend-exclude = '''
   | \.mypy_cache
   | \.tox
   | \.venv
-  | build
-  | dist
 )/
 '''
 

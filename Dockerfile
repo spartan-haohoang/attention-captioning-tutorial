@@ -15,25 +15,28 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     curl \
     git \
+    libjpeg-dev \
+    zlib1g-dev \
+    libpng-dev \
+    libfreetype6-dev \
+    liblcms2-dev \
+    libwebp-dev \
+    libharfbuzz-dev \
+    libfribidi-dev \
+    libxcb1-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Install uv for fast Python package management
-RUN pip install uv
+# Install Poetry
+RUN pip install poetry
 
-# Copy dependency files
-COPY requirements.txt requirements-dev.txt ./
+# Copy Poetry configuration
 COPY pyproject.toml ./
 
-# Install Python dependencies
-RUN uv pip install --system -r requirements.txt
-RUN uv pip install --system -r requirements-dev.txt
+# Configure Poetry: Don't create virtual environment, install to system
+RUN poetry config virtualenvs.create false
 
-# Install Jupyter and extensions
-RUN uv pip install --system \
-    jupyter \
-    jupyterlab \
-    ipywidgets \
-    nbconvert
+# Install Python dependencies using Poetry
+RUN poetry install --only=main --no-root
 
 # Create directories for data and notebooks
 RUN mkdir -p /app/data /app/notebooks /app/models
